@@ -2,6 +2,7 @@ package com.orogersilva.empregocerto.model;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import com.orogersilva.empregocerto.EmpregoCertoApp;
 import com.orogersilva.empregocerto.di.component.AppComponent;
 
 /**
@@ -18,9 +19,9 @@ public class BaseModel {
 
     // region CONSTRUCTORS
 
-    public BaseModel(AppComponent appComponent, SQLiteDatabase database) {
+    public BaseModel(EmpregoCertoApp app, SQLiteDatabase database) {
 
-        mAppComponent = appComponent;
+        mAppComponent = app.getAppComponent();
         mSQLiteDatabase = database;
     }
 

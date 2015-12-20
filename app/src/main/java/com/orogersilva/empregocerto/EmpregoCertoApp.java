@@ -2,6 +2,9 @@ package com.orogersilva.empregocerto;
 
 import android.app.Application;
 
+import com.orogersilva.empregocerto.di.component.AppComponent;
+import com.orogersilva.empregocerto.di.component.DaggerAppComponent;
+import com.orogersilva.empregocerto.di.module.AppModule;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
 /**
@@ -11,7 +14,7 @@ public class EmpregoCertoApp extends Application {
 
     // region FIELDS
 
-
+    private AppComponent mAppComponent;
 
     // endregion
 
@@ -24,6 +27,20 @@ public class EmpregoCertoApp extends Application {
 
         // Initializing DBFlow...
         FlowManager.init(this);
+
+        // Initializing dependency graph...
+        mAppComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
+    }
+
+    // endregion
+
+    // region GETTERS AND SETTERS
+
+    public AppComponent getAppComponent() {
+
+        return mAppComponent;
     }
 
     // endregion

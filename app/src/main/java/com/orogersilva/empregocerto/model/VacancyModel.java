@@ -2,6 +2,7 @@ package com.orogersilva.empregocerto.model;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import com.orogersilva.empregocerto.EmpregoCertoApp;
 import com.orogersilva.empregocerto.di.component.AppComponent;
 import com.orogersilva.empregocerto.vo.Vacancy;
 import com.orogersilva.empregocerto.vo.Vacancy_Table;
@@ -17,8 +18,8 @@ public class VacancyModel extends BaseModel {
 
     // region CONSTRUCTORS
 
-    public VacancyModel(AppComponent appComponent, SQLiteDatabase database) {
-        super(appComponent, database);
+    public VacancyModel(EmpregoCertoApp app, SQLiteDatabase database) {
+        super(app, database);
     }
 
     // endregion
