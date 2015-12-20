@@ -2,6 +2,7 @@ package com.orogersilva.empregocerto.vo;
 
 import com.orogersilva.empregocerto.model.JobDatabase;
 import com.orogersilva.empregocerto.utils.Validation;
+import com.orogersilva.empregocerto.utils.exception.ValidationFailedException;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
@@ -43,7 +44,8 @@ public class Vacancy extends BaseModel implements Validation {
     @Override
     public void validate() {
 
-        // TODO: 20/12/2015 To implement.
+        if (id <= 0)
+            throw new ValidationFailedException("Invalid vacancy id.");
     }
 
     // endregion

@@ -36,6 +36,9 @@ public class VacancyModel extends BaseModel {
 
     public synchronized void save(Vacancy vacancy) {
 
+        if (vacancy == null)
+            throw new NullPointerException();
+
         vacancy.validate();
 
         Vacancy existingVacancy = load(vacancy.getId());

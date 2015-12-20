@@ -1,6 +1,7 @@
 package com.orogersilva.empregocerto;
 
 import android.app.Application;
+import android.support.annotation.VisibleForTesting;
 
 import com.orogersilva.empregocerto.di.component.AppComponent;
 import com.orogersilva.empregocerto.di.component.DaggerAppComponent;
@@ -41,6 +42,12 @@ public class EmpregoCertoApp extends Application {
     public AppComponent getAppComponent() {
 
         return mAppComponent;
+    }
+
+    @VisibleForTesting
+    public void setTestComponent(AppComponent appComponent) {
+
+        mAppComponent = appComponent;
     }
 
     // endregion
