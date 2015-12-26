@@ -37,7 +37,7 @@ public class Vacancy extends BaseModel implements Validation {
     public Vacancy() {}
 
     @VisibleForTesting
-    public Vacancy(int id, String title, String description, double salary) {
+    public Vacancy(long id, String title, String description, double salary) {
 
         this.id = id;
         this.title = title;
@@ -84,6 +84,10 @@ public class Vacancy extends BaseModel implements Validation {
 
         if (id <= 0) throw new ValidationFailedException("Invalid vacancy id.");
     }
+
+    // endregion
+
+    // region OVERRIDED METHODS
 
     @Override
     public boolean equals(Object obj) {

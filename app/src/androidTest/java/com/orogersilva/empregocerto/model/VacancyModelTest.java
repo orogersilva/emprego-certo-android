@@ -1,6 +1,8 @@
 package com.orogersilva.empregocerto.model;
 
 import android.support.test.runner.AndroidJUnit4;
+import android.test.suitebuilder.annotation.MediumTest;
+import android.test.suitebuilder.annotation.SmallTest;
 
 import com.orogersilva.empregocerto.BaseTest;
 import com.orogersilva.empregocerto.utils.exception.ValidationFailedException;
@@ -39,6 +41,7 @@ public class VacancyModelTest extends BaseTest {
 
     // region TEST METHODS
 
+    @SmallTest
     @Test(expected = NullPointerException.class)
     public void saveWhenVacancyIsNullThrowsNullPointerException() throws Exception {
 
@@ -47,12 +50,13 @@ public class VacancyModelTest extends BaseTest {
         mVacancyModel.save(null);
     }
 
+    @SmallTest
     @Test(expected = ValidationFailedException.class)
     public void saveWhenVacancyIdIsInvalidThrowsValidationFailedException() throws Exception {
 
         // ARRANGE
 
-        final int INVALID_ID = 0;
+        final long INVALID_ID = 0;
         final String TITLE = "";
         final String DESCRIPTION = "";
         final double SALARY = 0;
@@ -79,12 +83,13 @@ public class VacancyModelTest extends BaseTest {
         fail("ValidationFailedException did not throw!");
     }
 
+    @MediumTest
     @Test
-    public void saveWhenIsNewVacancyThenSaveIsSuccess() throws Exception {
+    public void saveWhenIsNewVacancyThenSaveIsSuccessuful() throws Exception {
 
         // ARRANGE
 
-        final int ID = 1;
+        final long ID = 1;
         final String TITLE = "Programmer";
         final String DESCRIPTION = "Responsible for developing software.";
         final double SALARY = 3000.0;
@@ -104,12 +109,13 @@ public class VacancyModelTest extends BaseTest {
         assertEquals(ASSERT_ERROR_MESSAGE, expectedVacancy, vacancyRetrievedFromDatabase);
     }
 
+    @MediumTest
     @Test
     public void saveWhenVacancyExistsThenUpdateVacancyWithSuccess() throws Exception {
 
         // ARRANGE
 
-        final int ID = 1;
+        final long ID = 1;
         final String TITLE = "Programmer";
         final String DESCRIPTION = "Responsible for developing software.";
         final double SALARY = 3000.0;
@@ -129,6 +135,51 @@ public class VacancyModelTest extends BaseTest {
         // ASSERT
 
         Vacancy vacancyRetrievedFromDatabase = mVacancyModel.load(ID);
+
+        assertEquals(ASSERT_ERROR_MESSAGE, expectedVacancy, vacancyRetrievedFromDatabase);
+    }
+
+    @MediumTest
+    @Test
+    public void loadWhenVacancyIdNotExistsThenReturnsNull() throws Exception {
+
+        // ARRANGE
+
+        final long INVALID_ID = 0;
+
+        final String ASSERT_ERROR_MESSAGE = "Vacancy object must be null!";
+
+        // ACT
+
+        Vacancy vacancyRetrievedFromDatabase = mVacancyModel.load(INVALID_ID);
+
+        // ASSERT
+
+        assertNull(ASSERT_ERROR_MESSAGE, vacancyRetrievedFromDatabase);
+    }
+
+    @MediumTest
+    @Test
+    public void loadWhenVacancyIdIsExistsThenReturnsVacancy() throws Exception {
+
+        // ARRANGE
+
+        final long ID = 1;
+        final String TITLE = "Programmer";
+        final String DESCRIPTION = "Responsible for developing software.";
+        final double SALARY = 3000.0;
+
+        final String ASSERT_ERROR_MESSAGE = "";
+
+        Vacancy expectedVacancy = new Vacancy(ID, TITLE, DESCRIPTION, SALARY);
+
+        // ACT
+
+        mVacancyModel.save(expectedVacancy);
+
+        Vacancy vacancyRetrievedFromDatabase = mVacancyModel.load(ID);
+
+        // ASSERT
 
         assertEquals(ASSERT_ERROR_MESSAGE, expectedVacancy, vacancyRetrievedFromDatabase);
     }
