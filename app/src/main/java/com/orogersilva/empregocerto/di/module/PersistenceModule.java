@@ -13,10 +13,10 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by note-roger on 20/12/2015.
+ * Created by note-roger on 26/12/2015.
  */
 @Module
-public class AppModule {
+public class PersistenceModule {
 
     // region FIELDS
 
@@ -26,12 +26,10 @@ public class AppModule {
 
     // region CONSTRUCTORS
 
-    public AppModule(EmpregoCertoApp app) {
+    public PersistenceModule(EmpregoCertoApp app) {
 
         mApp = app;
     }
-
-    // endregion
 
     // region DEPENDENCY PROVIDERS
 

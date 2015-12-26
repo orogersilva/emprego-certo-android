@@ -3,11 +3,9 @@ package com.orogersilva.empregocerto;
 import android.support.test.InstrumentationRegistry;
 import android.test.AndroidTestCase;
 
-import com.orogersilva.empregocerto.di.component.DaggerAppComponent;
 import com.orogersilva.empregocerto.di.component.DaggerTestComponent;
 import com.orogersilva.empregocerto.di.component.TestComponent;
-import com.orogersilva.empregocerto.di.module.AppModule;
-import com.orogersilva.empregocerto.di.module.TestModule;
+import com.orogersilva.empregocerto.di.module.TestPersistenceModule;
 
 import org.junit.After;
 import org.junit.Before;
@@ -35,7 +33,7 @@ public class BaseTest extends AndroidTestCase {
                 .getTargetContext().getApplicationContext();
 
         mTestComponent = DaggerTestComponent.builder()
-                .testModule(new TestModule(app))
+                .testPersistenceModule(new TestPersistenceModule(app))
                 .build();
 
         app.setTestComponent(mTestComponent);
