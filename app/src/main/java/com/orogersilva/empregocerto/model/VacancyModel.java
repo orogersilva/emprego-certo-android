@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.orogersilva.empregocerto.EmpregoCertoApp;
 import com.orogersilva.empregocerto.di.component.AppComponent;
+import com.orogersilva.empregocerto.utils.exception.ValidationFailedException;
 import com.orogersilva.empregocerto.vo.Vacancy;
 import com.orogersilva.empregocerto.vo.Vacancy_Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -39,7 +40,14 @@ public class VacancyModel extends BaseModel {
         if (vacancy == null)
             throw new NullPointerException();
 
-        vacancy.validate();
+        try {
+
+            vacancy.validate();
+
+        } catch (ValidationFailedException e) {
+
+            throw e;
+        }
 
         Vacancy existingVacancy = load(vacancy.getId());
 

@@ -9,6 +9,7 @@ import com.orogersilva.empregocerto.di.component.TestComponent;
 import com.orogersilva.empregocerto.di.module.AppModule;
 import com.orogersilva.empregocerto.di.module.TestModule;
 
+import org.junit.After;
 import org.junit.Before;
 
 /**
@@ -18,6 +19,7 @@ public class BaseTest extends AndroidTestCase {
 
     // region FIELDS
 
+    private EmpregoCertoApp app;
     private TestComponent mTestComponent;
 
     // endregion
@@ -29,7 +31,7 @@ public class BaseTest extends AndroidTestCase {
 
         super.setUp();
 
-        EmpregoCertoApp app = (EmpregoCertoApp) InstrumentationRegistry
+        app = (EmpregoCertoApp) InstrumentationRegistry
                 .getTargetContext().getApplicationContext();
 
         mTestComponent = DaggerTestComponent.builder()
@@ -46,6 +48,16 @@ public class BaseTest extends AndroidTestCase {
     protected TestComponent getTestComponent() {
 
         return mTestComponent;
+    }
+
+    // endregion
+
+    // region TEARDOWN
+
+    @After
+    public void tearDown() throws Exception {
+
+        app = null;
     }
 
     // endregion

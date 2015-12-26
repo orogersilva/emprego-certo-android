@@ -1,5 +1,7 @@
 package com.orogersilva.empregocerto.vo;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.orogersilva.empregocerto.model.JobDatabase;
 import com.orogersilva.empregocerto.utils.Validation;
 import com.orogersilva.empregocerto.utils.exception.ValidationFailedException;
@@ -30,11 +32,47 @@ public class Vacancy extends BaseModel implements Validation {
 
     // endregion
 
+    // region CONSTRUCTORS
+
+    public Vacancy() {}
+
+    @VisibleForTesting
+    public Vacancy(int id, String title, String description, double salary) {
+
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.salary = salary;
+    }
+
+    // endregion
+
     // region GETTERS AND SETTERS
 
     public long getId() {
 
         return id;
+    }
+
+    public String getTitle() {
+
+        return title;
+    }
+
+    public String getDescription() {
+
+        return description;
+    }
+
+    public double getSalary() {
+
+        return salary;
+    }
+
+    @VisibleForTesting
+    public void setSalary(double salary) {
+
+        this.salary = salary;
     }
 
     // endregion
@@ -44,8 +82,23 @@ public class Vacancy extends BaseModel implements Validation {
     @Override
     public void validate() {
 
-        if (id <= 0)
-            throw new ValidationFailedException("Invalid vacancy id.");
+        if (id <= 0) throw new ValidationFailedException("Invalid vacancy id.");
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (!(obj instanceof Vacancy)) return false;
+        if (obj == this) return true;
+
+        Vacancy vacancy = (Vacancy) obj;
+
+        final double ACCEPTABLE_PRECISION = 0.001;
+
+        return vacancy.getId() == this.getId() &&
+                vacancy.getTitle().equals(this.getTitle()) &&
+                vacancy.getDescription().equals(this.getDescription()) &&
+                (Math.abs(vacancy.getSalary() - this.getSalary()) < ACCEPTABLE_PRECISION);
     }
 
     // endregion
