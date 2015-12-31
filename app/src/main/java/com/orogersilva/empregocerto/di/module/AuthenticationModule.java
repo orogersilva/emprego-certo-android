@@ -13,7 +13,5 @@ public class AuthenticationModule {
 
     // region DEPENDENCY PROVIDERS
 
-    LISessionManager
-
     // endregion
 }
