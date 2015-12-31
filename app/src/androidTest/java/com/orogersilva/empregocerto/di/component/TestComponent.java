@@ -1,5 +1,6 @@
 package com.orogersilva.empregocerto.di.component;
 
+import com.orogersilva.empregocerto.di.module.TestAuthenticationModule;
 import com.orogersilva.empregocerto.di.module.TestPersistenceModule;
 import com.orogersilva.empregocerto.model.VacancyModelTest;
 
@@ -12,7 +13,7 @@ import dagger.Component;
  */
 @Singleton
 @Component(
-        modules = TestPersistenceModule.class
+        modules = {TestPersistenceModule.class, TestAuthenticationModule.class}
 )
 public interface TestComponent extends AppComponent {
 

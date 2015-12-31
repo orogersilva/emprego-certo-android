@@ -1,5 +1,6 @@
 package com.orogersilva.empregocerto.di.component;
 
+import com.orogersilva.empregocerto.di.module.AuthenticationModule;
 import com.orogersilva.empregocerto.di.module.PersistenceModule;
 
 import javax.inject.Singleton;
@@ -11,7 +12,7 @@ import dagger.Component;
  */
 @Singleton
 @Component(
-        modules = PersistenceModule.class
+        modules = {PersistenceModule.class, AuthenticationModule.class}
 )
 public interface AppComponent {
 }
