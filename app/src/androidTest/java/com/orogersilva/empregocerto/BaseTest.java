@@ -5,6 +5,7 @@ import android.test.AndroidTestCase;
 
 import com.orogersilva.empregocerto.di.component.DaggerTestComponent;
 import com.orogersilva.empregocerto.di.component.TestComponent;
+import com.orogersilva.empregocerto.di.module.TestAuthenticationModule;
 import com.orogersilva.empregocerto.di.module.TestPersistenceModule;
 
 import org.junit.After;
@@ -33,6 +34,7 @@ public class BaseTest extends AndroidTestCase {
                 .getTargetContext().getApplicationContext();
 
         mTestComponent = DaggerTestComponent.builder()
+                .testAuthenticationModule(new TestAuthenticationModule(app))
                 .testPersistenceModule(new TestPersistenceModule(app))
                 .build();
 
