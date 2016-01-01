@@ -7,5 +7,5 @@
 /captures
 /.idea/workspace.xml
 /.idea/libraries
-/libs/linkedin-sdk
+/libs/linkedin-sdk/build
 /local.properties
