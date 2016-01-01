@@ -5,6 +5,7 @@ import android.support.annotation.VisibleForTesting;
 
 import com.orogersilva.empregocerto.di.component.AppComponent;
 import com.orogersilva.empregocerto.di.component.DaggerAppComponent;
+import com.orogersilva.empregocerto.di.module.AuthenticationModule;
 import com.orogersilva.empregocerto.di.module.PersistenceModule;
 
 import com.raizlabs.android.dbflow.config.FlowManager;
@@ -32,6 +33,7 @@ public class EmpregoCertoApp extends Application {
 
         // Initializing dependency graph...
         mAppComponent = DaggerAppComponent.builder()
+                .authenticationModule(new AuthenticationModule(this))
                 .persistenceModule(new PersistenceModule(this))
                 .build();
     }
